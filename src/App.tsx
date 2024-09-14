@@ -1,6 +1,5 @@
 import React from 'react';
 import Kanbas from "./Kanbas";
-import logo from './logo.svg';
 import './App.css';
 import Labs from './Labs';
 import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
