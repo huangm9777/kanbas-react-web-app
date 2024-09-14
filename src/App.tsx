@@ -10,38 +10,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <div>
         
           <h1>Mingfu Huang, CS5610.20596.202510</h1>
-            {/* <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LAB ASSIGNMENTS
-            </a> 
-            <br/>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              KANBAS APPLICATION 
-            </a> 
-            <br/>
-            <a
-              className="App-link"
-              href="https://github.com/huangm9777/kanbas-react-web-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              CODE REPOSITORY 
-            </a> 
-            
-           */}
           
           <body>
             <a
