@@ -1,13 +1,16 @@
 import "./index.css";
 import { Dimensions } from "./Dimensions";
 import { Position } from "./Position";
+import BootstrapGrids from "./BootstrapGrids";
+import ScreenSizeLabel from "./ScreenSizeLabel";
+import BootstrapTables from "./BootstrapTables";
 
 export default function Lab2() {
   const handleSend = () => {
     console.log("send");
   }
   return (
-    <div>
+    <div className="container">
       <h2>Lab 2</h2>
       <p>Styled Component is imported</p>
       <h2>Colors</h2>
@@ -27,6 +30,11 @@ export default function Lab2() {
 
       <Dimensions />
       <Position />
+      <BootstrapGrids />
+      <ScreenSizeLabel></ScreenSizeLabel>
+      <BootstrapTables/>
+      
+
 
     </div>
     

@@ -15,14 +15,6 @@ function App() {
           <h1>Mingfu Huang, CS5610.20596.202510</h1>
           
           <body>
-            <a
-              className="App-link"
-              href="https://github.com/huangm9777/kanbas-react-web-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              CODE REPOSITORY 
-            </a> 
               <div >
               <HashRouter>
                 <div>
