@@ -1,0 +1,127 @@
+
+p#chat-container {
+  color: black;
+  background-color: yellow;
+  border-style: dashed;
+  padding: 10px;
+  margin-left: 50px;
+  margin-top: 50px;
+  
+}
+.chat-text-1 {
+  color: black;
+  background-color: yellow;
+  border-style: dashed;
+  padding: 10px;
+  margin-left: 50px;
+  margin-top: 50px;
+  
+}
+
+.styled-text-2 {
+
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-color: greenyellow;
+  border-width: 10px;
+  border-style: dashed;
+  padding: 10px;
+  margin-left: 50px;
+  margin-top: 50px;
+  
+}
+
+
+
+
+.message-input-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.message-input {
+  color: black;
+  background-color: white;
+  margin-bottom: 10px;
+  border-color: transparent;
+  background-color: transparent;
+  border-color: black;
+  padding:  10px;
+  
+}
+.send-button {
+  background-color: greenyellow;
+  border: 30px;
+  border-radius: 30px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  
+}
+.send-button:hover {
+  background-color: rgb(128, 255, 128);
+}
+
+.send-button:active {
+  background-color: rgb(100, 200, 100);
+  transform: scale(0.95); 
+
+}
+/* Dimension */
+.wd-dimension-portrait {
+  
+  background-color: yellow;
+}
+
+.wd-dimension-landscape {
+
+  background-color: blue;
+}
+
+.wd-dimension-square {
+  background-color: red;
+} 
+.wd-dimension-portrait {
+   width: 75px;
+   height: 100px;
+}
+
+.wd-dimension-landscape {
+   width: 100px;
+   height: 75px;
+}
+
+.wd-dimension-square {
+   width: 75px;
+   height: 75px;
+}
+
+/* Position */
+/* .wd-pos-relative-nudge-up-right {
+   position: relative;
+   bottom: 30px;
+   left: 30px;
+} */
+.wd-pos-relative-nudge-down-right {
+   position: relative;
+   top: 5px;
+   left: 20px;
+}
+/* .wd-pos-relative {
+   position: relative;
+} */
+
+#wd-screen-size-label {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  font-size: 12px;
+  z-index: 1000;
+  width: 220px;
+  text-align: center;
+}
