@@ -30,7 +30,7 @@ export default function Dashboard() {
             <div className="card rounded-3 overflow-hidden">
               <Link className="wd-dashboard-course-link text-decoration-none text-dark"
                 to="/Kanbas/Courses/1234/Home">
-                <img src="/images/reactjs.png" width="100%" height={160} />
+                <img src="/images/reactjs.png" alt="reactjs logo" width="100%" height={160} />
                 <div className="card-body">
                   <h5 className="wd-dashboard-course-title card-title">
                     CS1234 React JS

@@ -176,7 +176,7 @@ export function BootstrapForms() {
             <p className="card-text">
               Stacking the most powerful rocket in history. Mars or bust!
             </p>
-            <a href="#" className="btn btn-primary">
+            <a href="Kanbas/Courses/1234/Home" className="btn btn-primary">
               Boldly Go
             </a>
           </div>

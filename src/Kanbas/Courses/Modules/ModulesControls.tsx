@@ -14,22 +14,23 @@ export default function ModulesControls() {
           Publish All</button>
         <ul className="dropdown-menu">
           <li>
-            <a id="wd-publish-all-modules-and-items-btn" className="dropdown-item" >
+            <a id="wd-publish-all-modules-and-items-btn" className="dropdown-item" href='Kanbas/Courses/1234/Home'
+            >
               <GreenCheckmark />
               Publish all modules and items</a>
           </li>
           <li>
-            <a id="wd-publish-modules-only-button" className="dropdown-item" >
+            <a id="wd-publish-modules-only-button" className="dropdown-item" href='Kanbas/Courses/1234/Home'>
               <GreenCheckmark />
               Publish modules only</a>
           </li>
           <li>
-            <a id="wd-unpublish-all-modules-and-items" className="dropdown-item" >
+            <a id="wd-unpublish-all-modules-and-items" className="dropdown-item" href='Kanbas/Courses/1234/Home'>
               <BanCheckmark />
               Unpublish all modules and items</a>
           </li>
           <li>
-            <a id="wd-unpublish-modules-only" className="dropdown-item" >
+            <a id="wd-unpublish-modules-only" className="dropdown-item" href='Kanbas/Courses/1234/Home'>
               <BanCheckmark />
               Unpublish modules only</a>
           </li>
