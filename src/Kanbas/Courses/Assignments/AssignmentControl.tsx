@@ -1,7 +1,5 @@
 import Form from 'react-bootstrap/Form';
-import { CiSearch } from "react-icons/ci";
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
+
 import { Button, InputGroup } from 'react-bootstrap';
 import { FaSearch } from 'react-icons/fa';  // For the search icon
 

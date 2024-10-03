@@ -7,7 +7,6 @@ import { CiCalendarDate } from "react-icons/ci";
 import { IoIosNotificationsOutline } from "react-icons/io";
 
 
-{/* Find more icons */}
 export default function CourseStatus() {
   return (
     <div id="wd-course-status" className="container" style={{ width: "350px" }}>

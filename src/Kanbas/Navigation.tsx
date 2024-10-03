@@ -1,9 +1,6 @@
-import { Link } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai";
-import { IoCalendarOutline } from "react-icons/io5";
-import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
+
 import { FaInbox, FaRegCircleUser, FaBook, FaCalendarDays, FaGear } from "react-icons/fa6";
-import { BsBook } from "react-icons/bs";
 import { NavLink } from 'react-router-dom';
 
 
@@ -15,7 +12,7 @@ export default function KanbasNavigation() {
 
 
       <a href="https://www.northeastern.edu/" id="wd-neu-link" className="list-group-item bg-black border-0 text-center">
-        <img src="/images/NU_logo.png" width="75px" /></a>
+        <img src="/images/NU_logo.png" alt="Nu logo" width="75px" /></a>
 
 
       <NavLink to="/Kanbas/Account" id="wd-account-link"

@@ -168,7 +168,7 @@ export function BootstrapForms() {
         <div className="card"
           style={{ width: "18rem" }}>
           <img src="https://github.com/huangm9777/kanbas-react-web-app/blob/b65776272ab25eb0adcf7dc462443e2575c2c85f/public/logo192.png?raw=true"
-            className="card-img-top" />
+            alt="ReactJS logo" className="card-img-top" />
           <div className="card-body">
             <h5 className="card-title">
               Stacking Starship
