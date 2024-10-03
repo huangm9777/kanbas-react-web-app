@@ -1,52 +1,124 @@
 import "./index.css";
+import Form from 'react-bootstrap/Form';
+import AssignmentControl from "./AssignmentControl";
+import LessonControlButtons from "../Modules/LessonControlButtons";
+import ModulesControlButtons from "../Modules/ModulesControlButtons";
+import { BsGripVertical } from "react-icons/bs";
+import { PiNotePencil } from "react-icons/pi";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+
 
 export default function Assignments() {
   return (
-    <div id="wd-assignments">
-      <input id="wd-search-assignment"
-             placeholder="Search for Assignments" />
-      <button id="wd-add-assignment-group">+ Group</button>
-      <button id="wd-add-assignment">+ Assignment</button>
-      <h3 id="wd-assignments-title">
-        ASSIGNMENTS 40% of Total <button>+</button>
-      </h3>
-      <ul id="wd-assignment-list">
-      {/* A1 */}
-        <li className="wd-assignment-list-item">
-          <a className="wd-assignment-link"
-            href="#/Kanbas/Courses/1234/Assignments/123">
-            A1 - ENV + HTML
-          </a>
-        </li>
-        <li className="wd-assignment-list-item">
-            <p> Multiple Modules | <span className="bold">Not available</span> until May 13 at 12:00am | <span className="bold">Due</span> May 20 at 11:59pm | 100 pts</p>
+    <div id="wd-assignments" className="container">
 
-          {/* Complete On Your Own */}
-        </li>
-      {/* A2 */}
-        <li className="wd-assignment-list-item">
-          <a className="wd-assignment-link"
-            href="#/Kanbas/Courses/1234/Assignments/123">
-            A2 - CSS + Bootstrap
-          </a>
-        </li>
-        <li className="wd-assignment-list-item">
-            <p> Multiple Modules | <span className="bold">Not available</span> until May 20 at 12:00am | <span className="bold">Due</span> May 20 at 11:59pm | 100 pts</p>
+      <AssignmentControl />
+      <br />
+      <br />
+      <br />
 
-          {/* Complete On Your Own */}
-        </li>
-      {/* A3 */}
-        <li className="wd-assignment-list-item">
-          <a className="wd-assignment-link"
-            href="#/Kanbas/Courses/1234/Assignments/123">
-            A3 - React + JavaScript
-          </a>
-        </li>
-        <li className="wd-assignment-list-item">
-            <p> Multiple Modules | <span className="bold">Not available</span> until May 6 at 12:00am | <span className="bold">Due</span> May 13 at 11:59pm | 100 pts</p>
+      <ul id="wd-modules" className="list-group rounded-0">
+        <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
 
-          {/* Complete On Your Own */}
+          <div className="wd-title p-3 ps-2 bg-secondary">
+            <BsGripVertical className="me-2 fs-3" />
+            ASSIGNMENTS <span className="percentage_and_plus"><span className="percentage ">40% of Total</span> +</span>
+
+            <ModulesControlButtons />
+          </div>
+
+          <ul className="wd-lessons list-group rounded-0">
+
+            <li className="wd-lesson list-group-item p-3 ps-1">
+
+              <div className="flex-left">
+                <BsGripVertical className="me-2 fs-3" />
+                <PiNotePencil color="green" />
+
+
+                <div className="d-flex flex-column">
+                  <strong>
+                    <a className="wd-assignment-link"
+                      href="#/Kanbas/Courses/1234/Assignments/123">
+                      A1 - ENV + HTML
+                    </a>
+                  </strong>
+                  <span className="text-danger">Multiple Modules</span>
+                  <span className="text-muted">
+                    Not available until May 6 at 12:00am | Due May 13 at 11:59pm | 100 pts
+                  </span>
+                </div>
+              </div>
+              <LessonControlButtons />
+
+
+            </li>
+            <li className="wd-lesson list-group-item p-3 ps-1">
+
+              <div className="flex-left">
+                <BsGripVertical className="me-2 fs-3" />
+                <PiNotePencil color="green" />
+
+
+                <div className="d-flex flex-column">
+                  <strong>
+                    <a className="wd-assignment-link"
+                      href="#/Kanbas/Courses/1234/Assignments/123">
+                      A2
+                    </a>
+                  </strong>
+                  <span className="text-danger">Multiple Modules</span>
+                  <span className="text-muted">
+                    Not available until May 16 at 12:00am | Due May 13 at 11:59pm | 100 pts
+                  </span>
+                </div>
+              </div>
+              <LessonControlButtons />
+
+
+            </li>
+            <li className="wd-lesson list-group-item p-3 ps-1">
+
+              <div className="flex-left">
+                <BsGripVertical className="me-2 fs-3" />
+                <PiNotePencil color="green" />
+
+
+                <div className="d-flex flex-column">
+                  <strong>
+                    <a className="wd-assignment-link"
+                      href="#/Kanbas/Courses/1234/Assignments/123">
+                      A3
+                    </a>
+                  </strong>
+                  <span className="text-danger">Multiple Modules</span>
+                  <span className="text-muted">
+                    Not available until May 26 at 12:00am | Due May 13 at 11:59pm | 100 pts
+                  </span>
+                </div>
+              </div>
+              <LessonControlButtons />
+
+
+            </li>
+
+
+
+
+
+
+          </ul>
         </li>
       </ul>
+      <div>
+      </div>
+
+
+
+
     </div>
-);}
+  );
+}

@@ -6,6 +6,15 @@ body * {  font-family: Arial, Helvetica, sans-serif;  }
     padding-left: 140px !important;
   }
 }
+@media (min-width: 1280px) {
+  .hidden-on-small-screen {
+    display: block;
+  }
+  /* Styles for laptops */
+}
+.hidden-on-small-screen {
+  display: none;
+}
 
 
 .list-group.wd > .list-group-item.active {

@@ -8,8 +8,8 @@ export default function Home() {
       <div className="flex-fill">
         <Modules />
       </div>
-      <div className="d-none d-md-block">
-        <CourseStatus />
+      <div className="d-none d-xl-block">
+        <CourseStatus  />
       </div>
     </div>
 
