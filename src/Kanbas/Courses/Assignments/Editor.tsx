@@ -1,8 +1,9 @@
 import Form from 'react-bootstrap/Form';
-
 import Col from 'react-bootstrap/Col';
-
 import Row from 'react-bootstrap/Row';
+import * as db from "../../Database";
+import { useParams, useLocation } from "react-router";
+import { log } from 'console';
 
 
 
@@ -10,20 +11,25 @@ import Row from 'react-bootstrap/Row';
 
 
 export default function AssignmentEditor() {
+  const { aid } = useParams();
+  const { pathname } = useLocation();
+  const assignments = db.assignments;
+  const assignment = assignments.find(a => a._id == aid);
+  console.log(pathname);
   return (
     <div id="wd-assignments-editor">
       <Form>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label>Assignment Name</Form.Label>
           <Form.Control type="email" placeholder=""
-            defaultValue="A1 - ENV + HTML"
+            defaultValue={assignment?.title}
           />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
 
           <Form.Control as="textarea" rows={3} cols={50}
-            defaultValue="The assignment is available online Submit a link to the landing page of"
+            defaultValue={assignment?.description}
           />
         </Form.Group>
 
@@ -122,29 +128,34 @@ export default function AssignmentEditor() {
           <Form.Label column sm={5} align="right">
             Assign
           </Form.Label>
-          
+
           <Col sm={5}>
             <Form.Control type=" " placeholder=" " defaultValue={"100"} />
           </Col>
-          
+
         </Form.Group>
 
 
       </Form>
+      <a href={`#/Kanbas/Courses/${pathname.split("/")[3]}/Assignments`}>
 
-      <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end">
-        
-        Module</button>
-      <button id="wd-add-module-btn" className="btn btn-lg btn-secondary me-1 float-end">
-        
-        Cancel</button>
+        <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end">
+
+          Save</button>
+      </a>
+      <a href={`#/Kanbas/Courses/${pathname.split("/")[3]}/Assignments`}>
+
+        <button id="wd-add-module-btn" className="btn btn-lg btn-secondary me-1 float-end">
+
+          Cancel</button>
+      </a>
 
 
 
 
 
 
-{/* 
+      {/* 
       <table>
         <table>
           <tr>
