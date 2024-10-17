@@ -49,7 +49,8 @@ export default function Assignments() {
                     <div className="d-flex flex-column">
                       <strong>
                         <a className="wd-assignment-link"
-                          href={`#/Kanbas/Courses/${cid}/Assignments/${a._id}`}>
+                          href={`#/Kanbas/Courses/${cid}/Assignments/${a._id}`}
+                          style={{ textDecoration: 'none',color: 'black' }}>
 
                           {a.title}
                         </a>

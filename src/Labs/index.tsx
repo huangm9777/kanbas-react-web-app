@@ -8,7 +8,7 @@ export default function Labs() {
     <div>
       <TOC />
       <h1>Labs</h1>
-      <p>Mingfu Huang</p>
+      <h1>Mingfu Huang, CS5610.20596.202510</h1>
       <Routes>
         {/* <Route path="/" element={<Navigate to="Lab1" />} /> */}
         <Route path="Lab1" element={<Lab1 />} />
