@@ -1,5 +1,4 @@
-import { Select } from 'antd';
-import { SetStateAction, useState } from 'react';
+
 import VariablesAndConstants from './VariableAndConst';
 import BooleanVariables from './BooleanVariables';
 import IfElse from './IfElse';

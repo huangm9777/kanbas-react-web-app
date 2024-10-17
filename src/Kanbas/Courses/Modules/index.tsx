@@ -1,5 +1,4 @@
 import LessonControlButtons from "./LessonControlButtons";
-import ModulesControlButtons from "./ModulesControlButtons";
 import ModulesControls from "./ModulesControls";
 import { BsGripVertical } from "react-icons/bs";
 import { useParams } from "react-router";

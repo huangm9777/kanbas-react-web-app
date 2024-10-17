@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Routes, Route, Navigate, useParams  } from "react-router";
-import { link } from "fs";
+import { useParams  } from "react-router";
 
 export default function CoursesNavigation() {
 

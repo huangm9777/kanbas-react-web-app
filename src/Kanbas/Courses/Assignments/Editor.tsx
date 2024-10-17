@@ -3,7 +3,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import * as db from "../../Database";
 import { useParams, useLocation } from "react-router";
-import { log } from 'console';
+
 
 
 
@@ -14,7 +14,7 @@ export default function AssignmentEditor() {
   const { aid } = useParams();
   const { pathname } = useLocation();
   const assignments = db.assignments;
-  const assignment = assignments.find(a => a._id == aid);
+  const assignment = assignments.find(a => a._id === aid);
   console.log(pathname);
   return (
     <div id="wd-assignments-editor">
