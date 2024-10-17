@@ -1,3 +1,20 @@
 .bold {
   font-weight: bold;
 }
+
+.percentage{
+  border: 1px solid #0a0a0a;
+  border-radius: 30px;
+  padding : 5px 10px;
+}
+.percentage_and_plus{
+  align-items: end;
+  
+
+}
+.flex-left{ 
+  display: flex;
+  flex-direction: row;
+
+}
+

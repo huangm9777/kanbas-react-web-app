@@ -53,6 +53,10 @@ function BootstrapGrids() {
                             bg-success text-white">
               <h3>Column D</h3>
             </div>
+            <div className="col-12 col-md-6 col-xl-3 
+                            bg-success text-white">
+              <h3>Column D</h3>
+            </div>
           </div>
         </div>
         <div id="wd-bs-responsive-dramatic">
