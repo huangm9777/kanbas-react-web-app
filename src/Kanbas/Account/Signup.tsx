@@ -50,7 +50,7 @@ export default function Signup() {
             <Link id="wd-signin-btn"
               to="/Kanbas/Dashboard">
 
-              <Button type="submit" className="btn-secondary">
+              <Button type="submit" className="btn-secondary mb-3">
                 Sign in</Button>
             </Link>
 

@@ -3,18 +3,25 @@ import TOC from "./TOC";
 import Lab2 from "./Lab2";
 import Lab3 from "./Lab3";
 import Lab1 from "./Lab1";
+import Lab4 from "./Lab4";
+import { Provider } from "react-redux";
+import store from "./store";
 export default function Labs() {
   return (
-    <div>
-      <TOC />
-      <h1>Labs</h1>
-      <h1>Mingfu Huang, CS5610.20596.202510</h1>
-      <Routes>
-        {/* <Route path="/" element={<Navigate to="Lab1" />} /> */}
-        <Route path="Lab1" element={<Lab1 />} />
-        <Route path="Lab2" element={<Lab2 />} />
-        <Route path="Lab3/*" element={<Lab3 />} />
-      </Routes>
-    </div>
+    <Provider store={store}>
+
+      <div>
+        <TOC />
+        <h1>Labs</h1>
+        <h1>Mingfu Huang, CS5610.20596.202510</h1>
+        <Routes>
+          {/* <Route path="/" element={<Navigate to="Lab1" />} /> */}
+          <Route path="Lab1" element={<Lab1 />} />
+          <Route path="Lab2" element={<Lab2 />} />
+          <Route path="Lab3/*" element={<Lab3 />} />
+          <Route path="Lab4/*" element={<Lab4 />} />
+        </Routes>
+      </div>
+    </Provider>
   );
 }

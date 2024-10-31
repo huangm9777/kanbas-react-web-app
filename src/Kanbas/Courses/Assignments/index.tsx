@@ -33,7 +33,7 @@ export default function Assignments() {
             <BsGripVertical className="me-2 fs-3" />
             ASSIGNMENTS <span className="percentage_and_plus"><span className="percentage ">40% of Total</span> +</span>
 
-            <ModulesControlButtons />
+            {/* <ModulesControlButtons /> */}
           </div>
 
           <ul className="wd-lessons list-group rounded-0">
