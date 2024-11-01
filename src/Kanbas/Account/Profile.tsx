@@ -1,86 +1,54 @@
-import { Link } from "react-router-dom";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentUser } from "./reducer";
 export default function Profile() {
+  const [profile, setProfile] = useState<any>({});
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const fetchProfile = () => {
+    if (!currentUser) return navigate("/Kanbas/Account/Signin");
+    setProfile(currentUser);
+  };
+  const signout = () => {
+    dispatch(setCurrentUser(null));
+    navigate("/Kanbas/Account/Signin");
+  };
+  useEffect(() => { fetchProfile(); }, []);
   return (
-    <div id="wd-profile-screen">
+    <div className="wd-profile-screen">
       <h3>Profile</h3>
-
-
-      <Form.Floating className="mb-3">
-        <Form.Control
-          id="floatingInputCustom"
-          type="username"
-          placeholder="Alice"
-        />
-        <label htmlFor="floatingInputCustom">Username</label>
-      </Form.Floating>
-
-      <Form.Floating className="mb-3">
-        <Form.Control
-          id="floatingPasswordCustom"
-          type="password"
-          placeholder="Password"
-        />
-        <label htmlFor="floatingPasswordCustom">Password</label>
-      </Form.Floating>
-
-      <Form.Floating className="mb-3">
-        <Form.Control
-          id="floatingInputCustom"
-          type="string"
-          placeholder="Alice"
-        />
-        <label htmlFor="floatingInputCustom">First Nane</label>
-      </Form.Floating>
-
-      <Form.Floating className="mb-3">
-        <Form.Control
-          id="floatingInputCustom"
-          type="placeholder"
-          placeholder="Alice"
-        />
-        <label htmlFor="floatingInputCustom">Username</label>
-      </Form.Floating>
-
-      <Form.Floating className="mb-3">
-        <Form.Control
-          id="floatingInputCustom"
-          type="email"
-          placeholder="name@example.com"
-        />
-        <label htmlFor="floatingInputCustom">Email address</label>
-      </Form.Floating>
-
-      <div>
-        <label htmlFor="date-input" className="form-label md-3">
-          Select a date:
-        </label>
-        <input
-          id="date-input"
-          type="date"
-          className="form-control"
-
-        />
-      </div>
-        <p>Select Role: </p>
-      <Form.Select aria-label="Default select example" className="mb-3">
-        <option>Role</option>
-        <option value="USER">User</option>
-        <option value="ADMIN">Admin</option>
-        <option value="FACULTY">Faculty</option>
-        <option value="STUDENT">Student</option>
-      </Form.Select>
-
-      <Link id="wd-signin-btn"
-        to="/Kanbas/Account/Signin" >
-
-        <Button type="submit">
-          Sign up</Button>
-      </Link>
-
-
-    </div>
-  );
+      {profile && (
+        <div>
+          <label >Username:</label>
+          <input defaultValue={profile.username} id="wd-username" className="form-control mb-2"
+            onChange={(e) => setProfile({ ...profile, username: e.target.value })} />
+          <label >Password:</label>
+          <input defaultValue={profile.password} id="wd-password" className="form-control mb-2"
+            onChange={(e) => setProfile({ ...profile, password: e.target.value })} />
+          <label >First name:</label>
+          <input defaultValue={profile.firstName} id="wd-firstname" className="form-control mb-2"
+            onChange={(e) => setProfile({ ...profile, firstName: e.target.value })} />
+          <label >Last name:</label>
+          <input defaultValue={profile.lastName} id="wd-lastname" className="form-control mb-2"
+            onChange={(e) => setProfile({ ...profile, lastName: e.target.value })} />
+          <label >Date of birth:</label>
+          <input defaultValue={profile.dob} id="wd-dob" className="form-control mb-2"
+            onChange={(e) => setProfile({ ...profile, dob: e.target.value })} type="date" />
+          <label >E-mail:</label>
+          <input defaultValue={profile.email} id="wd-email" className="form-control mb-2"
+            onChange={(e) => setProfile({ ...profile, email: e.target.value })} />
+          <label >Role:</label>
+          <select onChange={(e) => setProfile({ ...profile, role: e.target.value })}
+            className="form-control mb-2" id="wd-role">
+            <option value="USER">User</option>            <option value="ADMIN">Admin</option>
+            <option value="FACULTY">Faculty</option>      <option value="STUDENT">Student</option>
+          </select>
+          <button onClick={signout} className="btn btn-danger w-100 mb-2" id="wd-signout-btn">
+            Sign out
+          </button>
+        </div>
+      )}
+    </div>);
 }

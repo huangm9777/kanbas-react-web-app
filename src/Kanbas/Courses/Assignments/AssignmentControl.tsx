@@ -3,10 +3,13 @@ import Form from 'react-bootstrap/Form';
 import { Button, InputGroup } from 'react-bootstrap';
 import { FaSearch } from 'react-icons/fa';  // For the search icon
 
+import { useSelector } from "react-redux";
 
 
 
 export default function AssignmentControl() {
+    const { currentUser } = useSelector((state: any) => state.accountReducer);
+    const isFACULTY = currentUser.role === "FACULTY";
     return (
 
         <div className=" container">
@@ -23,31 +26,20 @@ export default function AssignmentControl() {
                     aria-describedby="search-icon"
                 />
             </InputGroup>
+            {isFACULTY &&
+                <div className='float-end'>
 
-            <div className='float-end'>
+                    {/* Group button */}
+                    <Button variant="outline-secondary" className="me-2">
+                        + Group
+                    </Button>
 
-            {/* Group button */}
-            <Button variant="outline-secondary" className="me-2">
-                + Group
-            </Button>
+                    {/* Assignment button */}
+                    <Button variant="danger">
+                        + Assignment
+                    </Button>
 
-            {/* Assignment button */}
-            <Button variant="danger">
-                + Assignment
-            </Button>
-
-            </div>
-            {/* <input
-                type="text"
-                className="form-control form-control-sm"
-                placeholder="Search..."
-                md="4"
-            /> 
-            <Form.Control placeholder="First name" className='float-start mb-3'/>
-
-            <button className="btn btn-lg btn-secondary me-1 float-end">+ Group</button>
-            <button className="btn btn-lg btn-danger me-1 float-end">+ Assignment</button>
-*/}
+                </div>}
         </div>
 
 
