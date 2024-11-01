@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import * as db from "./Database";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { ButtonGroup } from "react-bootstrap";
+import { useState } from "react";
+import { addEnrollment,deleteEnrollment } from "./Enrollment/reducer";
 
 
 
@@ -15,9 +17,21 @@ export default function Dashboard(
 ) {
 
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const { enrollments } = db;
+  const { enrollments } = useSelector((state: any) => state.enrollmentReducer);
+  const [isEnrolled, setIsEnrolled] = useState(false);
+  const dispatch = useDispatch();
+
 
   const isFACULTY = currentUser.role === "FACULTY";
+  
+  const userId = currentUser._id;
+
+
+  function handleIsEnroll(): void {
+    setIsEnrolled(!isEnrolled);
+  }
+
+
 
 
   return (
@@ -26,8 +40,8 @@ export default function Dashboard(
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
 
       {/* new course edit area */}
-      <h5>New Course
-        {isFACULTY ?
+      {isFACULTY ?
+        <h5>New Course
           <ButtonGroup className="float-end">
             <button className="btn btn-primary "
               id="wd-add-new-course-click"
@@ -39,26 +53,40 @@ export default function Dashboard(
               Update
             </button>
           </ButtonGroup>
-          : null
-        }
+        </h5>
+        : null
+      }
 
 
-      </h5>
 
       <hr />
-      <input defaultValue={course.name} className="form-control mb-2"
-        value={course.name} placeholder="Course Name"
-        onChange={(e) => setCourse({ ...course, name: e.target.value })} >
-      </input>
-      <textarea defaultValue={course.description} className="form-control"
-        value={course.description} placeholder="Course Description"
-        onChange={(e) => setCourse({ ...course, description: e.target.value })}>
-      </textarea>
+      {
+        isFACULTY &&
+        <input defaultValue={course.name} className="form-control mb-2"
+          value={course.name} placeholder="Course Name"
+          onChange={(e) => setCourse({ ...course, name: e.target.value })} >
+        </input>
+      }
+      {
+        isFACULTY &&
+        <textarea defaultValue={course.description} className="form-control"
+          value={course.description} placeholder="Course Description"
+          onChange={(e) => setCourse({ ...course, description: e.target.value })}>
+        </textarea>
+      }
 
 
       {/* published courses  */}
 
       <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2> <hr />
+
+      {/* enrollment switch for student  */}
+      {!isFACULTY &&
+        <div className="d-flex justify-content-end" onClick={handleIsEnroll}>
+          <button className="btn btn-primary mb-2">Enrollments</button>
+        </div>
+      }
+
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4">
           {isFACULTY ?
@@ -108,27 +136,74 @@ export default function Dashboard(
             courses
               .filter((course) =>
                 enrollments.some(
-                  (enrollment) =>
+                  (enrollment: any) =>
                     enrollment.user === currentUser._id &&
                     enrollment.course === course._id
                 ))
               .map((course) => (
                 <div className="wd-dashboard-course col" style={{ width: "300px" }}>
                   <div className="card rounded-3 overflow-hidden">
-                    <Link to={`/Kanbas/Courses/${course._id}/Home`}
-                      className="wd-dashboard-course-link text-decoration-none text-dark" >
-                      <img src={course.image} alt="course img" width="100%" height={160} />
-                      <div className="card-body">
-                        <h5 className="wd-dashboard-course-title card-title">
-                          {course.name} </h5>
-                        <p className="wd-dashboard-course-title card-text overflow-y-hidden" style={{ maxHeight: 100 }}>
-                          {course.description} </p>
+
+                    <img src={course.image} alt="course img" width="100%" height={160} />
+                    <div className="card-body">
+                      <h5 className="wd-dashboard-course-title card-title">
+                        {course.name} </h5>
+                      <p className="wd-dashboard-course-title card-text overflow-y-hidden" style={{ maxHeight: 100 }}>
+                        {course.description} </p>
+
+                      <Link to={`/Kanbas/Courses/${course._id}/Home`}
+                        className="wd-dashboard-course-link text-decoration-none text-dark" >
                         <button className="btn btn-primary"> Go </button>
-                      </div>
-                    </Link>
+                      </Link>
+                      <button className="btn btn-danger float-end"
+                        onClick={() => {
+                          dispatch(deleteEnrollment({ course: course._id, user: userId }))
+                        }}
+                      > Unenroll </button>
+                    </div>
+
                   </div>
                 </div>
               ))}
+
+          {/* list the non enrolled courses  */}
+          {
+            (!isFACULTY && isEnrolled) &&
+
+            courses
+              .filter((course) =>
+                enrollments.every(
+                  (enrollment: any) =>
+                    !(enrollment.user === currentUser._id && enrollment.course === course._id)
+                )
+              )
+              .map((course) => (
+                <div className="wd-dashboard-course col" style={{ width: "300px" }}>
+                  <div className="card rounded-3 overflow-hidden">
+                    <img src={course.image} alt="course img" width="100%" height={160} />
+                    <div className="card-body">
+                      <h5 className="wd-dashboard-course-title card-title">
+                        {course.name} </h5>
+                      <p className="wd-dashboard-course-title card-text overflow-y-hidden" style={{ maxHeight: 100 }}>
+                        {course.description} </p>
+                      <Link to={`/Kanbas/Courses/${course._id}/Home`}
+                        className="wd-dashboard-course-link text-decoration-none text-dark" >
+                        <button className="btn btn-primary"> Go </button>
+                      </Link>
+                      <button className="btn btn-success float-end"
+                        onClick={() => {
+                          dispatch(addEnrollment({ course: course._id, user: userId }))
+                        }}
+                      > Enroll </button>
+                    </div>
+                  </div>
+                </div>
+              ))
+
+
+          }
+
+
 
 
 

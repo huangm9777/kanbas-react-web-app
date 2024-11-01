@@ -4,8 +4,9 @@ import Row from 'react-bootstrap/Row';
 import { useParams, useLocation } from "react-router";
 import { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { updateAssignment } from './reducer';
+import { updateAssignment, addAssignment } from './reducer';
 import { useNavigate } from "react-router-dom";
+import { courses } from '../../Database';
 
 
 
@@ -36,11 +37,41 @@ export default function AssignmentEditor() {
   const handleSave = (e: any) => {
     e.preventDefault();
     // TODO: Save assignment 
-    dispatch(updateAssignment(assignment));
+    const find = assignments.find((a: any) => a._id === assignment._id);
+    if (find) {
+
+      dispatch(updateAssignment(assignment));
+      console.log(assignment);
+
+    } else {
+
+
+
+      // setAssignment({
+      //   ...assignment,
+      //   _id: pathname.split('/')[5],
+      //   course: pathname.split('/')[3],
+      // });
+      const updatedAssignment = {
+        ...assignment,
+        _id: pathname.split('/')[5],
+        course: pathname.split('/')[3],
+      };
+      // Update state and then dispatch with the updated assignment
+      setAssignment(updatedAssignment);
+      console.log(updatedAssignment); // This will show the updated values
+      dispatch(addAssignment(updatedAssignment));
+      
+
+    }
+    // if (assignment._id in assignments) {
+
+    //   dispatch(updateAssignment(assignment));
+    // } else {
+    //   console.log(assignment._id in assignments);
+    //   dispatch(addAssignment(assignment));
+    // }
     navigate(`/Kanbas/Courses/${pathname.split("/")[3]}/Assignments`);
-    // console.log(assignments)
-
-
 
   }
   return (
@@ -85,14 +116,14 @@ export default function AssignmentEditor() {
           <Form.Label column sm={5} align="right">
             Assign
           </Form.Label >
-          
+
           <Col sm={5} className="border border-secondary rounded  pb-3"  >
 
             <Form.Label column sm={5} align="left">
               Due date
             </Form.Label>
             <Form.Control type="datetime-local" />
-            
+
             <Form.Label column sm={5} align="left">
               Avalible from
             </Form.Label>
@@ -109,7 +140,7 @@ export default function AssignmentEditor() {
 
 
       </Form>
-      
+
       <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end" onClick={handleSave}>
 
         Save</button>

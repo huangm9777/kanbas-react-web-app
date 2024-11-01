@@ -14,6 +14,7 @@ import AssignmentConfirm from "./AssignmentConfirm";
 export default function Assignments() {
 
   const { cid } = useParams();
+  
   // assignment from database
   // const assignments = db.assignments;
   // user from state
@@ -39,7 +40,7 @@ export default function Assignments() {
   return (
     <div id="wd-assignments" className="container">
 
-      <AssignmentControl />
+      <AssignmentControl courseId={cid}/>
       <br />
       <br />
       <br />

@@ -6,8 +6,8 @@ import { FaSearch } from 'react-icons/fa';  // For the search icon
 import { useSelector } from "react-redux";
 
 
-
-export default function AssignmentControl() {
+export default function AssignmentControl(courseId: any) {
+    // console.log('courseID='+courseId.courseId);
     const { currentUser } = useSelector((state: any) => state.accountReducer);
     const isFACULTY = currentUser.role === "FACULTY";
     return (
@@ -35,9 +35,14 @@ export default function AssignmentControl() {
                     </Button>
 
                     {/* Assignment button */}
-                    <Button variant="danger">
-                        + Assignment
-                    </Button>
+                    <a className="wd-assignment-link"
+                        href={`#/Kanbas/Courses/${courseId.courseId}/Assignments/A999`}
+                        style={{ textDecoration: 'none', color: 'black' }}>
+
+                        <Button variant="danger">
+                            + Assignment
+                        </Button>
+                    </a>
 
                 </div>}
         </div>
