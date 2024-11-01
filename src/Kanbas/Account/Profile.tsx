@@ -15,6 +15,7 @@ export default function Profile() {
     dispatch(setCurrentUser(null));
     navigate("/Kanbas/Account/Signin");
   };
+// eslint-disable-next-line react-hooks/exhaustive-deps
 
   useEffect(() => { fetchProfile(); }, []);
   return (
