@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import { ButtonGroup } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useCallback } from "react";
 import { addEnrollment, deleteEnrollment, setEnrollments } from "./Enrollment/reducer";
 import * as client from "./Enrollment/client"
 
@@ -49,10 +49,10 @@ export default function Dashboard(
   // }
 
 
-  const fetchEnrollments = async () => {
+  const fetchEnrollments = useCallback (async () => {
     const enrollments = await client.findAllEnrollments();
     dispatch(setEnrollments(enrollments));
-  }
+  },[])
   useEffect(() => {
     fetchEnrollments();
 

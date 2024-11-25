@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteAssignment, setAssignment } from "./reducer";
 import AssignmentConfirm from "./AssignmentConfirm";
 import * as client from "./clients"
-import { useEffect } from "react";
+import { useEffect,useCallback } from "react";
 
 
 
@@ -31,10 +31,21 @@ export default function Assignments() {
     await client.deleteAssignment(id);
     dispatch(deleteAssignment(id))
   }
-  const fetchAssignment = async () => {
+  const fetchAssignment =useCallback (async () => {
     const assignments = await client.fetchAssignmentsWithCid(cid as string);
     dispatch(setAssignment(assignments));
-  }
+  },[]);
+  
+//   const fetchProfile = useCallback(async () => {
+//     try {
+//         const currentUser = await client.profile();
+//         dispatch(setCurrentUser(currentUser));
+//     } catch (err: any) {
+//         console.error(err);
+//     }
+//     setPending(false);
+// }, [client, dispatch]); // Add dependencies if needed
+
   useEffect(() => {
 
     fetchAssignment();
