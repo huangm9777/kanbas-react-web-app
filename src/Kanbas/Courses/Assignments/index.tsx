@@ -40,7 +40,7 @@ export default function Assignments() {
   }
   useEffect(() => {
     fetchAssignment();
-  }, []);
+  }, [fetchAssignment]);
 
 
   return (

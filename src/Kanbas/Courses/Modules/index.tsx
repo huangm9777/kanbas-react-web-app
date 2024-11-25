@@ -50,7 +50,7 @@ export default function Modules() {
 
   useEffect(() => {
     fetchModules();
-  }, []);
+  }, [fetchModules]);
 
 
   return (
