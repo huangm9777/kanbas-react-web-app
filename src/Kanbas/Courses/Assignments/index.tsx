@@ -25,13 +25,6 @@ export default function Assignments() {
   // assignment from state
   const { assignments } = useSelector((state: any) => state.assignmentReducer);
 
-  const fetchAssignment = async () => {
-
-    const assignments = await client.fetchAssignmentsWithCid(cid as string);
-
-    dispatch(setAssignment(assignments));
-
-  }
   const dispatch = useDispatch();
 
   const deleteAssignmentById = async (id: string) => {
@@ -39,7 +32,12 @@ export default function Assignments() {
     dispatch(deleteAssignment(id))
   }
   useEffect(() => {
-    fetchAssignment();
+    // fetchAssignment();
+
+    async () => {
+      const assignments = await client.fetchAssignmentsWithCid(cid as string);
+      dispatch(setAssignment(assignments));
+    }
   }, []);
 
 
@@ -98,8 +96,8 @@ export default function Assignments() {
                     <LessonControlButtons />
                     <AssignmentConfirm dialogTitle="Delete Assignment"
                       // deleteAssignment={() => dispatch(deleteAssignment(a._id))} 
-                      deleteAssignment={()=>deleteAssignmentById(a._id)} 
-                      />
+                      deleteAssignment={() => deleteAssignmentById(a._id)}
+                    />
 
                   </li>
                 ))

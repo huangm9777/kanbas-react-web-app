@@ -36,10 +36,10 @@ export default function Modules() {
     dispatch(deleteModule(moduleId));
   };
 
-  const fetchModules = async () => {
-    const modules = await coursesClient.findModulesForCourse(cid as string);
-    dispatch(setModules(modules));
-  };
+  // const fetchModules = async () => {
+  //   const modules = await coursesClient.findModulesForCourse(cid as string);
+  //   dispatch(setModules(modules));
+  // };
 
 
   const saveModule = async (module: any) => {
@@ -49,7 +49,12 @@ export default function Modules() {
 
 
   useEffect(() => {
-    fetchModules();
+    // fetchModules();
+
+    const fetchModules = async () => {
+      const modules = await coursesClient.findModulesForCourse(cid as string);
+      dispatch(setModules(modules));
+    };
   }, []);
 
 
