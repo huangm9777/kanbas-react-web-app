@@ -51,7 +51,7 @@ export default function Dashboard(
 
   useEffect(() => {
     fetchEnrollments();
-  }, );
+  }, []);
 
   const { enrollments } = useSelector((state: any) => state.enrollmentReducer);
 
