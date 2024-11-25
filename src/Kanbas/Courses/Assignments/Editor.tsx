@@ -40,7 +40,7 @@ export default function AssignmentEditor() {
     const find = assignments.find((a: any) => a._id === assignment._id);
     if (find) {
       await client.updateAssignment(pathname.split('/')[3] as string, assignment);
-      // dispatch(updateAssignment(assignment));
+      dispatch(updateAssignment(assignment));
       
 
     } else {
