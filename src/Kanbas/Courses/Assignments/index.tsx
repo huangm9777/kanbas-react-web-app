@@ -6,15 +6,17 @@ import { BsGripVertical } from "react-icons/bs";
 import { PiNotePencil } from "react-icons/pi";
 import { FaTrash } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAssignment } from "./reducer";
+import { deleteAssignment, setAssignment } from "./reducer";
 import AssignmentConfirm from "./AssignmentConfirm";
+import * as client from "./clients"
+import { useEffect } from "react";
 
 
 
 export default function Assignments() {
 
   const { cid } = useParams();
-  
+
   // assignment from database
   // const assignments = db.assignments;
   // user from state
@@ -23,24 +25,28 @@ export default function Assignments() {
   // assignment from state
   const { assignments } = useSelector((state: any) => state.assignmentReducer);
 
+  const fetchAssignment = async () => {
+
+    const assignments = await client.fetchAssignmentsWithCid(cid as string);
+
+    dispatch(setAssignment(assignments));
+
+  }
   const dispatch = useDispatch();
 
-  // const handleDelete = (assignmentId: string) => {
-
-  //   const isConfirmed = window.confirm("Are you sure you want to delete this assignment?");
-
-  //   // If the user clicks "OK", delete the assignment
-  //   if (isConfirmed) {
-  //     dispatch(deleteAssignment(assignmentId));
-  //   }
-  //   // dispatch(deleteAssignment(assignmentId));
-  // }
+  const deleteAssignmentById = async (id: string) => {
+    await client.deleteAssignment(id);
+    dispatch(deleteAssignment(id))
+  }
+  useEffect(() => {
+    fetchAssignment();
+  }, []);
 
 
   return (
     <div id="wd-assignments" className="container">
 
-      <AssignmentControl courseId={cid}/>
+      <AssignmentControl courseId={cid} />
       <br />
       <br />
       <br />
@@ -85,13 +91,15 @@ export default function Assignments() {
                       </div>
                     </div>
                     {/* <FaTrash className="text-danger me-2 mb-1" onClick={(e) => handleDelete(a._id)} /> */}
-                    <FaTrash className="text-danger me-2 mb-1" 
-                    data-bs-toggle="modal" data-bs-target="#wd-add-module-dialog"
-                     />
+                    <FaTrash className="text-danger me-2 mb-1"
+                      data-bs-toggle="modal" data-bs-target="#wd-add-module-dialog"
+                    />
 
                     <LessonControlButtons />
-                    <AssignmentConfirm dialogTitle="Delete Assignment" 
-                       deleteAssignment={()=>dispatch(deleteAssignment(a._id))} />
+                    <AssignmentConfirm dialogTitle="Delete Assignment"
+                      // deleteAssignment={() => dispatch(deleteAssignment(a._id))} 
+                      deleteAssignment={()=>deleteAssignmentById(a._id)} 
+                      />
 
                   </li>
                 ))

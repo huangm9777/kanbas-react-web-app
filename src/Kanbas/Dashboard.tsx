@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-// import * as db from "./Database";
+
 import { useSelector, useDispatch } from "react-redux";
 import { ButtonGroup } from "react-bootstrap";
-import { useState } from "react";
-import { addEnrollment,deleteEnrollment } from "./Enrollment/reducer";
-
+import { useState,useEffect } from "react";
+import { addEnrollment, deleteEnrollment, setEnrollments } from "./Enrollment/reducer";
+import * as client from "./Enrollment/client"
 
 
 export default function Dashboard(
@@ -17,13 +17,12 @@ export default function Dashboard(
 ) {
 
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const { enrollments } = useSelector((state: any) => state.enrollmentReducer);
   const [isEnrolled, setIsEnrolled] = useState(false);
   const dispatch = useDispatch();
 
 
   const isFACULTY = currentUser.role === "FACULTY";
-  
+
   const userId = currentUser._id;
 
 
@@ -31,8 +30,30 @@ export default function Dashboard(
     setIsEnrolled(!isEnrolled);
   }
 
+  const enrollCourse = (course: string) => {
+    client.enrollCourses(userId, course);
+    dispatch(addEnrollment({ course: course, user: userId }));
+
+  }
+
+  const unenrollCourse = (course: string) => {
+    client.unenrollCourses(userId, course);
+
+    dispatch(deleteEnrollment({ course: course, user: userId }))
+
+  }
+
+  const fetchEnrollments = async () => {
+    const enrollments = await client.findAllEnrollments();
+    dispatch(setEnrollments(enrollments));
+  }
 
 
+  useEffect(() => {
+    fetchEnrollments();
+  }, []);
+
+  const { enrollments } = useSelector((state: any) => state.enrollmentReducer);
 
   return (
 
@@ -156,8 +177,11 @@ export default function Dashboard(
                         <button className="btn btn-primary"> Go </button>
                       </Link>
                       <button className="btn btn-danger float-end"
+                        // onClick={() => {
+                        //   dispatch(deleteEnrollment({ course: course._id, user: userId }))
+                        // }}
                         onClick={() => {
-                          dispatch(deleteEnrollment({ course: course._id, user: userId }))
+                          unenrollCourse(course._id)
                         }}
                       > Unenroll </button>
                     </div>
@@ -191,9 +215,13 @@ export default function Dashboard(
                         <button className="btn btn-primary"> Go </button>
                       </Link>
                       <button className="btn btn-success float-end"
+                        // onClick={() => {
+                        //   dispatch(addEnrollment({ course: course._id, user: userId }))
+                        // }}   
                         onClick={() => {
-                          dispatch(addEnrollment({ course: course._id, user: userId }))
+                          enrollCourse(course._id)
                         }}
+
                       > Enroll </button>
                     </div>
                   </div>

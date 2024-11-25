@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { updateAssignment, addAssignment } from './reducer';
 import { useNavigate } from "react-router-dom";
-// import { courses } from '../../Database';
+import * as client from "./clients"
 
 
 
@@ -34,43 +34,30 @@ export default function AssignmentEditor() {
   );
 
 
-  const handleSave = (e: any) => {
+  const handleSave = async (e: any) => {
     e.preventDefault();
     // TODO: Save assignment 
     const find = assignments.find((a: any) => a._id === assignment._id);
     if (find) {
-
-      dispatch(updateAssignment(assignment));
-      console.log(assignment);
+      await client.updateAssignment(pathname.split('/')[3] as string, assignment);
+      // dispatch(updateAssignment(assignment));
+      
 
     } else {
 
-
-
-      // setAssignment({
-      //   ...assignment,
-      //   _id: pathname.split('/')[5],
-      //   course: pathname.split('/')[3],
-      // });
       const updatedAssignment = {
         ...assignment,
-        _id: pathname.split('/')[5],
         course: pathname.split('/')[3],
       };
       // Update state and then dispatch with the updated assignment
-      setAssignment(updatedAssignment);
-      console.log(updatedAssignment); // This will show the updated values
-      dispatch(addAssignment(updatedAssignment));
       
+      const createdAssignment = await client.createAssignmentForCourse(pathname.split('/')[3] as string, updatedAssignment);
+      setAssignment(createdAssignment);
+      dispatch(addAssignment(createdAssignment));
 
     }
-    // if (assignment._id in assignments) {
+    
 
-    //   dispatch(updateAssignment(assignment));
-    // } else {
-    //   console.log(assignment._id in assignments);
-    //   dispatch(addAssignment(assignment));
-    // }
     navigate(`/Kanbas/Courses/${pathname.split("/")[3]}/Assignments`);
 
   }
