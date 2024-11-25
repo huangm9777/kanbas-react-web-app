@@ -48,12 +48,12 @@ export default function Modules() {
   };
 
 
+  const fetchModules = async () => {
+    const modules = await coursesClient.findModulesForCourse(cid as string);
+    dispatch(setModules(modules));
+  };
   useEffect(() => {
 
-    const fetchModules = async () => {
-      const modules = await coursesClient.findModulesForCourse(cid as string);
-      dispatch(setModules(modules));
-    };
     fetchModules();
   }, []);
 

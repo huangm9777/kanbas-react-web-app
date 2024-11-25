@@ -49,11 +49,11 @@ export default function Dashboard(
   // }
 
 
+  const fetchEnrollments = async () => {
+    const enrollments = await client.findAllEnrollments();
+    dispatch(setEnrollments(enrollments));
+  }
   useEffect(() => {
-    const fetchEnrollments = async () => {
-      const enrollments = await client.findAllEnrollments();
-      dispatch(setEnrollments(enrollments));
-    }
     fetchEnrollments();
 
   }, []);
