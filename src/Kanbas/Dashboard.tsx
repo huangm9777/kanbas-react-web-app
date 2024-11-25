@@ -52,11 +52,11 @@ export default function Dashboard(
   const fetchEnrollments = useCallback (async () => {
     const enrollments = await client.findAllEnrollments();
     dispatch(setEnrollments(enrollments));
-  },[])
+  },[dispatch])
   useEffect(() => {
     fetchEnrollments();
 
-  }, []);
+  }, [fetchEnrollments]);
 
   const { enrollments } = useSelector((state: any) => state.enrollmentReducer);
 

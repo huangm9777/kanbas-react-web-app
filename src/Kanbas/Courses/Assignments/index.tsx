@@ -34,7 +34,7 @@ export default function Assignments() {
   const fetchAssignment =useCallback (async () => {
     const assignments = await client.fetchAssignmentsWithCid(cid as string);
     dispatch(setAssignment(assignments));
-  },[]);
+  },[cid,dispatch]);
   
 //   const fetchProfile = useCallback(async () => {
 //     try {

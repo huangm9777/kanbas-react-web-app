@@ -24,7 +24,7 @@ export default function Session({ children }: { children: any }) {
             console.error(err);
         }
         setPending(false);
-    }, []); // Add dependencies if needed
+    }, [dispatch]); // Add dependencies if needed
 
     useEffect(() => {
         fetchProfile();

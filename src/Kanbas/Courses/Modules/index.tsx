@@ -51,11 +51,11 @@ export default function Modules() {
   const fetchModules = useCallback (async () => {
     const modules = await coursesClient.findModulesForCourse(cid as string);
     dispatch(setModules(modules));
-  },[])
+  },[cid,dispatch])
   useEffect(() => {
 
     fetchModules();
-  }, []);
+  }, [fetchModules]);
 
 
   return (
