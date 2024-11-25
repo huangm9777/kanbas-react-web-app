@@ -7,8 +7,7 @@ export default function Session({ children }: { children: any }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // fetchProfile();
-        async () => {
+        const fetchProfile = async () => {
             try {
                 const currentUser = await client.profile();
                 dispatch(setCurrentUser(currentUser));
@@ -17,6 +16,7 @@ export default function Session({ children }: { children: any }) {
             }
             setPending(false);
         };
+        fetchProfile();
     }, []);
 
 

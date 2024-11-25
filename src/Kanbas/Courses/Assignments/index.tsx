@@ -32,12 +32,12 @@ export default function Assignments() {
     dispatch(deleteAssignment(id))
   }
   useEffect(() => {
-    // fetchAssignment();
 
-    async () => {
+    const fetchAssignment = async () => {
       const assignments = await client.fetchAssignmentsWithCid(cid as string);
       dispatch(setAssignment(assignments));
     }
+    fetchAssignment();
   }, []);
 
 

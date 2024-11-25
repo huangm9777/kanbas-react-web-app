@@ -50,11 +50,11 @@ export default function Dashboard(
 
 
   useEffect(() => {
-    // fetchEnrollments();
-    async () => {
+    const fetchEnrollments = async () => {
       const enrollments = await client.findAllEnrollments();
       dispatch(setEnrollments(enrollments));
     }
+    fetchEnrollments();
 
   }, []);
 
