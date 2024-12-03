@@ -8,14 +8,14 @@ export const fetchQuizzesWithCid = async (courseId: string) => {
     const response = await axios
         .get(`${API}/course/${courseId}`);
 
-    return response.data;
+    return response;
 };
 
 export const fetchQuizWithqid = async (qid: string) => {
     const response = await axios
         .get(`${API}/quiz/${qid}`);
 
-    return response.data;
+    return response;
 };
 
 
@@ -28,17 +28,18 @@ export const fetchQuizWithqid = async (qid: string) => {
 
 
 export const updateQuiz = async (qid: string, quiz: any) => {
-    const { data } = await axios.put(`${API}/${qid}`, quiz);
+    const  data  = await axios.put(`${API}/${qid}`, quiz);
     return data;
 };
-// export const createAssignmentForCourse = async (courseId: string, assignment: any) => {
-//     // assignment._id = ;
-//     const response = await axios.post(
-//         `${COURSES_API}/${courseId}`,
-//         assignment
-//     );
-//     return response.data;
-// };
+
+export const createQuiz= async (quiz: any) => {
+    // assignment._id = ;
+    const response = await axios.post(
+        `${API}/${quiz.qid}`,
+        quiz
+    );
+    return response;
+};
 
 
 

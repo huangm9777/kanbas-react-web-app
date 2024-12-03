@@ -5,30 +5,38 @@ import { useParams, useLocation } from "react-router";
 import { useEffect, useCallback, useState } from "react";
 import * as client from '../clients'
 import InputGroup from 'react-bootstrap/InputGroup';
+// import ReactQuill from "react-quill"; // WYSIWYG Editor
+import { useNavigate } from "react-router-dom"; 
 
 
+export default function QuizEditorDetail(propQuiz: any) {
+    const navigate = useNavigate();
 
-
-export default function QuizEditorDetail() {
-    const [quiz, setQuiz] = useState({} as any);
+    const [quiz, setQuiz] = useState(propQuiz);
 
     const { qid } = useParams();
     const { pathname } = useLocation();
 
+
     // save quiz
     const saveQuiz = async () => {
 
-        await client.updateQuiz(qid as string, quiz);
-        
+        const status = await client.updateQuiz(qid as string, quiz);
+        console.log(status);
+        if (status.status === 200) {
+            console.log("Quiz saved successfully!");
+            navigate(`/Kanbas/Courses/${pathname.split("/")[3]}/Quizzes/${pathname.split("/")[5]}`);
+        } else {
+            console.error("Failed to save quiz. Status:", status);
+            alert("Failed to save quiz. Please try again.");
+        }
 
     }
     // fetch quizzes from server
     const fetchQuiz = useCallback(async () => {
         const serverQuiz = await client.fetchQuizWithqid(qid as string);
 
-        setQuiz(serverQuiz);
-
-
+        setQuiz(serverQuiz.data);
     }, [qid]);
 
     useEffect(() => {
@@ -37,7 +45,7 @@ export default function QuizEditorDetail() {
 
     return (
 
-        <div id="wd-assignments-editor">
+        <div id="wd-assignments-editor" className='container'>
 
             <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -51,16 +59,19 @@ export default function QuizEditorDetail() {
 
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Quiz Instructions: </Form.Label>
 
-                    <Form.Control as="textarea" rows={3} cols={50}
-                    // defaultValue={assignment?.description}
-                    // onChange={(e) => setAssignment({ ...assignment, description: e.target.value })}
-                    />
-                </Form.Group>
 
             </Form>
+            <label htmlFor="question" className="form-label fw-bold">
+                Quiz instructions:
+            </label>
+            {/* <ReactQuill
+                // value={question}
+                // onChange={setQuestion}
+                theme="snow"
+                className="mb-3"
+            /> */}
+
 
 
             <br />
@@ -252,14 +263,13 @@ export default function QuizEditorDetail() {
 
 
             </Form>
+            {/* <a href={`#/Kanbas/Courses/${pathname.split("/")[3]}/Quizzes/${pathname.split("/")[5]}`}> */}
 
             <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end"
                 onClick={saveQuiz}>
-                <a href={`#/Kanbas/Courses/${pathname.split("/")[3]}/Quizzes/${pathname.split("/")[5]}`}>
-
-                    Save
-                </a>
+                Save
             </button>
+
             <a
                 href={`#/Kanbas/Courses/${pathname.split("/")[3]}/Quizzes`}
             >

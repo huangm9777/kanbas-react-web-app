@@ -1,3 +1,4 @@
+import TrueFalseEditor from "./TrueFalseEditor";
 
 
 
@@ -8,10 +9,7 @@ export default function QuizEditorQuestion() {
 
 
         <div>
-            <h1>
-
-                QuizEditorQuestion
-            </h1>
+            <TrueFalseEditor/>
         </div>
     )
 }

@@ -1,7 +1,6 @@
 import "./index.css";
 import { BsGripVertical } from "react-icons/bs";
 // import { IoEllipsisVertical } from "react-icons/io5";
-
 import QuizControl from './QuizControl';
 import QuizStatus from "./QuizStatus";
 import QuizOperation from "./QuizOperation";
@@ -30,8 +29,8 @@ export default function Quizzes() {
     // fetch quizzes from server
     const fetchQuizzes = useCallback(async () => {
         const serverQuizzes = await client.fetchQuizzesWithCid(cid as string);
-        dispatch(setQuizzes(serverQuizzes));
-        // console.log(quizzes);
+        dispatch(setQuizzes(serverQuizzes.data));
+        
     }, [cid, dispatch]);
 
     useEffect(() => {

@@ -26,7 +26,7 @@ export default function QuizDetail() {
     const fetchQuiz = useCallback(async () => {
         const serverQuiz = await client.fetchQuizWithqid(qid as string);
         
-        setQuiz(serverQuiz);
+        setQuiz(serverQuiz.data);
     }, [qid]);
 
     useEffect(() => {
