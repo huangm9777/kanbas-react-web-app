@@ -28,16 +28,10 @@ export default function QuizControl() {
                 <div className='float-end'>
 
 
-                    {/* Assignment button */}
-                    <a className="wd-assignment-link"
-                        href={``}
-                        style={{ textDecoration: 'none', color: 'black' }}>
-
-                        <Button variant="danger">
-                            + Quiz
-                        </Button>
-                    </a>
-
+                    <Button variant="danger">
+                        + Quiz
+                    </Button>
+                    
                 </div>
 
 
