@@ -108,7 +108,7 @@ export default function Quizzes() {
                                     <div className="d-flex flex-column">
                                         <strong>
                                             <a className="wd-assignment-link"
-                                                // href={`#/Kanbas/Courses/${cid}/Assignments/${a._id}`}
+                                                href={`#/Kanbas/Courses/${cid}/Quizzes/${quiz.qid}`}
                                                 style={{ textDecoration: 'none', color: 'black' }}>
 
                                                 {quiz.title}

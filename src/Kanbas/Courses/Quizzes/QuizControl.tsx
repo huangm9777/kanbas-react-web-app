@@ -30,7 +30,7 @@ export default function QuizControl() {
 
                     {/* Assignment button */}
                     <a className="wd-assignment-link"
-                        // href={`#/Kanbas/Courses/${courseId.courseId}/Assignments/A999`}
+                        href={``}
                         style={{ textDecoration: 'none', color: 'black' }}>
 
                         <Button variant="danger">

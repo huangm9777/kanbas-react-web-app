@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateQuiz } from './reducer';
 import GreenCheckmark from "../Modules/GreenCheckmark";
 import { FaBan } from "react-icons/fa";
-import {useState} from "react";
+import { useState } from "react";
 
 
 export default function QuizOperation(
@@ -40,7 +40,7 @@ export default function QuizOperation(
         await client.updateQuiz(dbQuiz.qid, updatedQuiz);
         dispatch(updateQuiz(dbQuiz));
     }
-    
+
     return (
         <div>
 
@@ -57,15 +57,15 @@ export default function QuizOperation(
                         </a>
                     </li>
                     <li>
-                        <a id="wd-publish-modules-only-button" className="dropdown-item" >
+                        <button id="wd-publish-modules-only-button" className="dropdown-item" >
                             Delete
-                        </a>
+                        </button>
                     </li>
                     <li>
-                        <a id="wd-unpublish-all-modules-and-items" className="dropdown-item" onClick={handlePublish}>
+                        <button id="wd-unpublish-all-modules-and-items" className="dropdown-item" onClick={handlePublish}>
 
                             {isPublished ? "Unpublish" : "Publish"}
-                        </a>
+                        </button>
                     </li>
 
 
