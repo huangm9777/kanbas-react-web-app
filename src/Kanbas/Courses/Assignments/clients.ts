@@ -14,6 +14,7 @@ export const fetchAssignmentsWithCid = async (courseId: string) => {
 
 
 export const createAssignmentForCourse = async (courseId: string, assignment: any) => {
+    // assignment._id = ;
     const response = await axios.post(
         `${COURSES_API}/${courseId}`,
         assignment

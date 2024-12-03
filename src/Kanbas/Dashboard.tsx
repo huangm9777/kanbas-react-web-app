@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import { ButtonGroup } from "react-bootstrap";
-import { useState, useEffect,useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { addEnrollment, deleteEnrollment, setEnrollments } from "./Enrollment/reducer";
 import * as client from "./Enrollment/client"
 
@@ -49,10 +49,10 @@ export default function Dashboard(
   // }
 
 
-  const fetchEnrollments = useCallback (async () => {
+  const fetchEnrollments = useCallback(async () => {
     const enrollments = await client.findAllEnrollments();
     dispatch(setEnrollments(enrollments));
-  },[dispatch])
+  }, [dispatch])
   useEffect(() => {
     fetchEnrollments();
 
@@ -167,7 +167,9 @@ export default function Dashboard(
                     enrollment.course === course._id
                 ))
               .map((course) => (
-                <div className="wd-dashboard-course col" style={{ width: "300px" }}>
+                <div className="wd-dashboard-course col" style={{ width: "300px" }}
+                  key={course._id}
+                >
                   <div className="card rounded-3 overflow-hidden">
 
                     <img src={course.image} alt="course img" width="100%" height={160} />
