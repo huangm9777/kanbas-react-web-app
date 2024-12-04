@@ -3,7 +3,8 @@ import { Tab, Tabs } from "react-bootstrap";
 import { useState } from "react";
 import QuizEditorDetail from "./QuizEditorDetail";
 // import QuizEditorQuestion from "./QuizEditorQuestion";
-import ProblemEditor from "./ProblemEditor";
+import QuestionEditor from "./QuestionEditor";
+import QuestionPanel from "./QuestionPanel";
 
 
 
@@ -23,7 +24,8 @@ export default function QuizEditorTOC() {
                     {activeTab === "details" && <QuizEditorDetail />}
                 </Tab>
                 <Tab eventKey="questions" title="Questions">
-                    {activeTab === "questions" && <ProblemEditor />}
+                    {activeTab === "questions" && <QuestionPanel />}
+                    {/* {activeTab === "questions" && <QuestionEditor />} */}
                 </Tab>
             </Tabs>
 

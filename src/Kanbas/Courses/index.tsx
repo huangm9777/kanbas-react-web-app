@@ -9,6 +9,7 @@ import PeopleTable from "./People/Tables";
 import Quizzes from "./Quizzes";
 import QuizDetail from "./Quizzes/QuizDetail";
 import QuizEditor from "./Quizzes/QuizEditor";
+import QuestionEditor from "./Quizzes/QuizEditor/QuestionEditor";
 // import { courses } from "../Database";
 
 
@@ -49,7 +50,8 @@ export default function Courses({ courses }: { courses: any[]; }) {
             <Route path="People" element={<PeopleTable />} />
             <Route path="Quizzes" element={<Quizzes />} />
             <Route path="Quizzes/:qid" element={<QuizDetail />} />
-            <Route path="Quizzes/:qid/Editor/*" element={<QuizEditor />} />
+            <Route path="Quizzes/:qid/Editor/Details" element={<QuizEditor />} />
+            <Route path="Quizzes/:qid/Editor/Details/:quid" element={<QuestionEditor />} />
 
           </Routes>
 

@@ -11,21 +11,18 @@ export const fetchQuizzesWithCid = async (courseId: string) => {
     return response;
 };
 
+export const findQuestionsWithQuizId = async (qid: string) => {
+    const response = await axios
+        .get(`${API}/question/${qid}`);
+    return response;
+};
+
 export const fetchQuizWithqid = async (qid: string) => {
     const response = await axios
         .get(`${API}/quiz/${qid}`);
 
     return response;
 };
-
-
-// export const unpublish = async (qid: number) => {
-//     const response = await axios
-//         .put(`${API}/${qid}`);
-
-//     return response.data;
-// };
-
 
 export const updateQuiz = async (qid: string, quiz: any) => {
     const  data  = await axios.put(`${API}/${qid}`, quiz);
@@ -40,6 +37,8 @@ export const createQuiz= async (quiz: any) => {
     );
     return response;
 };
+
+
 
 
 
