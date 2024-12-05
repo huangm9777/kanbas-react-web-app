@@ -1,17 +1,30 @@
-import { useState } from "react";
+
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { useParams, useLocation } from "react-router";
+import { useNavigate } from "react-router-dom";
+import * as client from './client'
+import { useEffect, useCallback, useState } from "react";
+
 
 export default function QuestionEditor() {
     const [questionType, setQuestionType] = useState("1");
-    const [title, setTitle] = useState("");
+    const [title, setTitle] = useState("New Question");
     const [points, setPoints] = useState(1);
     const [questionText, setQuestionText] = useState("");
     const [answers, setAnswers] = useState<string[]>([""]);
     const [correctAnswer, setCorrectAnswer] = useState<number | string | boolean | null>(null);
+
+    const navigate = useNavigate();
+    const { qid } = useParams();
+    const { pathname } = useLocation();
+    const { quid } = useParams();
+    const intQid = parseInt(qid as string);
+    const intQuid = parseInt(quid as string);
+
 
     // Add an answer
     const addAnswer = () => setAnswers([...answers, ""]);
@@ -26,8 +39,10 @@ export default function QuestionEditor() {
     };
 
     // Save or update the question
-    const saveQuestion = () => {
+    const saveQuestion = async () => {
         const questionData = {
+            quid: intQuid,
+            qid: intQid,
             title,
             points,
             questionText,
@@ -35,17 +50,50 @@ export default function QuestionEditor() {
             answers,
             correctAnswer,
         };
-        console.log("Saved Question:", questionData);
+        const response = await client.saveQuestion(questionData);
+        if (response.status === 200) {
+
+            console.log("Saved Question:", questionData);
+        } else {
+            console.error("Failed to save question:", response.status);
+        }
+        cancelChanges()
     };
 
     // Cancel all changes
     const cancelChanges = () => {
-        setTitle("");
-        setPoints(1);
-        setQuestionText("");
-        setAnswers([""]);
-        setCorrectAnswer(null);
+        navigate(`/Kanbas/Courses/${pathname.split("/")[3]}/Quizzes/${qid}/Editor/Details`);
+
     };
+
+    const fetchQuestion = async (quid: string) => {
+        const response = await client.findQuestionsWithQuId(quid);
+        if (response.status === 200) {
+            console.log("response:", response)
+            if (response.data.length < 1) {
+                // if it is a new question 
+            } else {
+                // use database data
+                console.log("Question:", response.data);
+                const question = response.data;
+                setTitle(question.title);
+                setPoints(question.points);
+                setQuestionText(question.questionText);
+                setQuestionType(question.type);
+                setAnswers(question.answers);
+                setCorrectAnswer(question.correctAnswer);
+            }
+            // saveQuestion();
+
+        } else {
+            console.error("Failed to save quiz. Status:");
+            alert("Failed to save quiz. Please try again.");
+
+        }
+    }
+    useEffect(() => {
+        fetchQuestion(quid as string);
+    }, [])
 
     return (
         <div className="question-editor container">
@@ -58,8 +106,8 @@ export default function QuestionEditor() {
                         {/* problem title */}
                         <Col sm={5}>
                             <Form.Control type="" placeholder=''
-                            // value={problem.title}
-                            // onChange={(e) => setProblem({ ...problem, title: e.target.value })}
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
 
                             />
                         </Col>
@@ -86,8 +134,8 @@ export default function QuestionEditor() {
                         <Col sm={2}>
 
                             <Form.Control type="number"
-                            //  value={problem.points}
-                            //     onChange={(e) => setProblem({ ...problem, points: parseInt(e.target.value, 10) || 0 })}
+                                value={points}
+                                onChange={(e) => setPoints(parseInt(e.target.value, 10) || 0)}
 
                             />
 
@@ -100,11 +148,11 @@ export default function QuestionEditor() {
                 </Form.Group>
 
             </Form>
-            
+
             {/* Question Text (WYSIWYG Editor) */}
             <label htmlFor="questionText" className="form-label fw-bold">
                 Question:
-            </label>      
+            </label>
             <ReactQuill value={questionText} onChange={setQuestionText} />
 
 

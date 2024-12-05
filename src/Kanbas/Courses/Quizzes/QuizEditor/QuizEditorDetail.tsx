@@ -5,8 +5,8 @@ import { useParams, useLocation } from "react-router";
 import { useEffect, useCallback, useState } from "react";
 import * as client from '../clients'
 import InputGroup from 'react-bootstrap/InputGroup';
-// import ReactQuill from "react-quill"; // WYSIWYG Editor
-import { useNavigate } from "react-router-dom"; 
+import ReactQuill from "react-quill"; // WYSIWYG Editor
+import { useNavigate } from "react-router-dom";
 
 
 export default function QuizEditorDetail(propQuiz: any) {
@@ -22,15 +22,19 @@ export default function QuizEditorDetail(propQuiz: any) {
     const saveQuiz = async () => {
 
         const status = await client.updateQuiz(qid as string, quiz);
-        console.log(status);
+        // console.log(status);
         if (status.status === 200) {
-            console.log("Quiz saved successfully!");
+            console.log("Quiz saved successfully!", quiz.instruction);
             navigate(`/Kanbas/Courses/${pathname.split("/")[3]}/Quizzes/${pathname.split("/")[5]}`);
         } else {
             console.error("Failed to save quiz. Status:", status);
             alert("Failed to save quiz. Please try again.");
         }
 
+    }
+    // handle instruction change
+    const instructionChange = (value:string)=>{
+        setQuiz({...quiz, instruction: value})
     }
     // fetch quizzes from server
     const fetchQuiz = useCallback(async () => {
@@ -71,6 +75,7 @@ export default function QuizEditorDetail(propQuiz: any) {
                 theme="snow"
                 className="mb-3"
             /> */}
+            <ReactQuill value={quiz.instruction} onChange={instructionChange}/>
 
 
 
